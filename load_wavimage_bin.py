@@ -47,7 +47,7 @@ def load_wavimage_bin(path):
 #                  images=images,
 #                  DESCR=None)
     files = glob.glob(os.path.join(path, '*/*.wav'))
-    images = np.ndarray((len(files), 128, 320), dtype = np.uint8)
+    images = np.ndarray((len(files), 128, 302), dtype = np.uint8)
     labels = np.ndarray(len(files), dtype=np.int)
     for idx, file in enumerate(files):
         y,sr = librosa.load(file,offset=0.0,duration=7.0)
@@ -58,7 +58,7 @@ def load_wavimage_bin(path):
         label = os.path.split(os.path.dirname(file))[-1]
         labels[idx] = int(label)
         
-    flat_data = images.reshape((-1, 128 * 320 * COLOR_BYTE))
+    flat_data = images.reshape((-1, 128 * 302 * COLOR_BYTE))
     images = flat_data.view()
     return utils.Bunch(data=images,
                  target=labels.astype(np.int),

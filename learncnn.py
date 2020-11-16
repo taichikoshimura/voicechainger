@@ -15,7 +15,7 @@ batch_size = 128
 epochs = 20
 
 # 数字画像のサイズ 縦(row)と横(col)
-img_rows, img_cols = 128, 701
+img_rows, img_cols = 128, 302
 
 # 学習結果を保存するファイルの決定
 #if len(sys.argv)==1:
