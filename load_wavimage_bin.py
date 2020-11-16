@@ -47,24 +47,18 @@ def load_wavimage_bin(path):
 #                  images=images,
 #                  DESCR=None)
     files = glob.glob(os.path.join(path, '*/*.wav'))
-    images = np.ndarray((len(files), 128, 701), dtype = np.uint8)
+    images = np.ndarray((len(files), 128, 320), dtype = np.uint8)
     labels = np.ndarray(len(files), dtype=np.int)
     for idx, file in enumerate(files):
-        y,sr = librosa.load(file,sr=16000,offset=0.0,duration=7.0)
-
-        image = librosa.feature.melspectrogram(y=y,
-                                            sr=sr,
-                                            n_mels=128,
-                                            n_fft=512,
-                                            win_length=480,
-                                            hop_length=160,)
-        
+        y,sr = librosa.load(file,offset=0.0,duration=7.0)
+        S = librosa.feature.melspectrogram(y=y,sr=sr,n_mels=128)
+        image = librosa.amplitude_to_db(S, ref=np.max)
 
         # ディレクトリ名よりラベルを取得
         label = os.path.split(os.path.dirname(file))[-1]
         labels[idx] = int(label)
         
-    flat_data = images.reshape((-1, 128 * 701 * COLOR_BYTE))
+    flat_data = images.reshape((-1, 128 * 320 * COLOR_BYTE))
     images = flat_data.view()
     return utils.Bunch(data=images,
                  target=labels.astype(np.int),
