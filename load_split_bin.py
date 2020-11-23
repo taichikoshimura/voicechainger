@@ -8,10 +8,10 @@ from sklearn import utils
 import cv2
 from PIL import Image
  
-IMAGE_SIZE_X = 128
-IMAGE_SIZE_Y = 20
-#COLOR_BYTE = 3
-COLOR_BYTE = 1
+IMAGE_SIZE_X = 1000
+IMAGE_SIZE_Y = 1025
+COLOR_BYTE = 3
+#COLOR_BYTE = 1
 CATEGORY_NUM = 6
 threshhold = 80
  
@@ -22,10 +22,10 @@ def load_split_bin(path):
     files = glob.glob(os.path.join(path, '*/*.png'))
 
     # イメージとラベル領域を確保
-    #images = np.ndarray((len(files), IMAGE_SIZE, IMAGE_SIZE,
-    #                      COLOR_BYTE), dtype = np.uint8)
-    images = np.ndarray((len(files), IMAGE_SIZE_X, IMAGE_SIZE_Y)
-                       , dtype = np.uint8)
+    images = np.ndarray((len(files), IMAGE_SIZE_X, IMAGE_SIZE_Y,
+                          COLOR_BYTE), dtype = np.uint8)
+    #images = np.ndarray((len(files), IMAGE_SIZE_X, IMAGE_SIZE_Y)
+    #                   , dtype = np.uint8)
 
     labels = np.ndarray(len(files), dtype=np.int)
 
