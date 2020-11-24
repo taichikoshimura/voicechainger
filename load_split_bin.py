@@ -8,8 +8,8 @@ from sklearn import utils
 import cv2
 from PIL import Image
  
-IMAGE_SIZE_X = 1000
-IMAGE_SIZE_Y = 1025
+IMAGE_SIZE_X = 20
+IMAGE_SIZE_Y = 128
 COLOR_BYTE = 3
 #COLOR_BYTE = 1
 CATEGORY_NUM = 6
